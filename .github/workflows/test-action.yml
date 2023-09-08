@@ -19,7 +19,7 @@ jobs:
       - name: run code
         id: run_code
         run: |
-          java -jar github-actions-check-1.0.0-jar-with-dependencies.jar >> $GITHUB_OUTPUT
+          java -jar target/github-actions-check-1.0.0-jar-with-dependencies.jar >> $GITHUB_OUTPUT
       - name: display result
         run: |
           echo ${{ steps.run_code.outputs.result }}
