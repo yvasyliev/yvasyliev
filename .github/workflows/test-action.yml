@@ -23,3 +23,4 @@ jobs:
       - name: display result
         run: |
           echo ${{ steps.run_code.outputs.result }}
+          echo ${{ steps.run_code.outputs.result2 }}
