@@ -27,10 +27,13 @@ jobs:
           echo ${{ steps.run_code.outputs.status }}
           echo ${{ steps.run_code.outputs.reason }}
       - name: Commit & Push changes
-        uses: actions-js/push@master
+#        uses: actions-js/push@master
         if: ${{ steps.run_code.outputs.status }} == 'EXECUTED'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git commit -m "Update README.md"
+          git push
       - name: set completed reason
         if: ${{ steps.run_code.outputs.status }} == 'EXECUTED'
         run: |
