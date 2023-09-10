@@ -30,8 +30,6 @@ jobs:
       - name: commit & push changes
         if: ${{ steps.run_code.outputs.status }} == 'EXECUTED'
         run: |
-#          git config user.email "ye.vasyliev@gmail.com"
-#          git config user.name "Sudoku job"
           git commit -m "Update README.md"
           git push
       - name: set reason
