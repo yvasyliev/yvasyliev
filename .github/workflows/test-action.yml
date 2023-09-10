@@ -35,6 +35,7 @@ jobs:
         run: |
           git add README.md
           git status
+          git config user.email "ye.vasyliev@gmail.com"
           git config user.name "Sudoku job"
           git commit -m "Update README.md"
           git push
