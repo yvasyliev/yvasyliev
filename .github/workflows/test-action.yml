@@ -1,6 +1,8 @@
 name: Test action
 
-on: [ push, pull_request ]
+on:
+  issues:
+    types: [ opened ]
 
 jobs:
   build:
@@ -22,5 +24,23 @@ jobs:
           java -jar target/github-actions-check-1.0.0-jar-with-dependencies.jar >> $GITHUB_OUTPUT
       - name: display result
         run: |
-          echo ${{ steps.run_code.outputs.result }}
-          echo ${{ steps.run_code.outputs.result2 }}
+          echo ${{ steps.run_code.outputs.status }}
+          echo ${{ steps.run_code.outputs.reason }}
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        if: ${{ steps.run_code.outputs.status }} == 'EXECUTED'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: set completed reason
+        if: ${{ steps.run_code.outputs.status }} == 'EXECUTED'
+        run: |
+          echo "CLOSING_REASON=completed" >> $GITHUB_ENV
+      - name: set completed reason
+        if: ${{ steps.run_code.outputs.status }} != 'EXECUTED'
+        run: |
+          echo "CLOSING_REASON=not planned" >> $GITHUB_ENV
+      - name: handle result
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue close "${{ github.event.number }}" -c "${{ steps.run_code.outputs.reason }}" -r "${{ env.CLOSING_REASON }}"
