@@ -47,8 +47,8 @@ public class Main {
             return;
         }
 
-        var row = SudokuUtil.COL_NAMES.indexOf(cell.charAt(0));
-        var col = SudokuUtil.ROW_NAMES.indexOf(cell.charAt(1));
+        var row = SudokuUtil.ROW_NAMES.indexOf(cell.charAt(1));
+        var col = SudokuUtil.COL_NAMES.indexOf(cell.charAt(0));
         var cellValue = Integer.parseInt(value);
 
         var sudokuGame = new MarkdownSudokuGameSupplier().get();
@@ -62,6 +62,8 @@ public class Main {
         if (sudokuGame.emptyCells.isEmpty()) {
             sudokuGame = new SudokuGameSupplier().get();
             printResult(SudokuStatus.EXECUTED, "Congratulations! You've just solved a sudoku. Try a new one: https://github.com/yvasyliev");
+        } else {
+            printResult(SudokuStatus.EXECUTED, cell + " cell is filled. Try to fill the others: https://github.com/yvasyliev");
         }
 
         new ReadmeConsumer().accept(sudokuGame);
