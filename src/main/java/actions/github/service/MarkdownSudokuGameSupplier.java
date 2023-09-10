@@ -21,7 +21,7 @@ public class MarkdownSudokuGameSupplier implements Supplier<SudokuGame> {
             var emptyCells = new ArrayList<List<Integer>>();
             for (var i = 0; i < SudokuUtil.GRID_SIZE; i++) {
                 for (var j = 0; j < SudokuUtil.GRID_SIZE; j++) {
-                    var cell = markdown.selectFirst("table.grid > tr." + i + " > td." + j);
+                    var cell = markdown.selectFirst("table.grid tr." + i + " td." + j);
                     if (cell != null) {
                         if (cell.hasText()) {
                             grid[i][j] = Integer.parseInt(cell.text());
