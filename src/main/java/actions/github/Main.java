@@ -38,7 +38,7 @@ public class Main {
 
     private static void fillCell(String cell, String value) {
         if (!SudokuUtil.isInputCellValid(cell)) {
-            printResult(SudokuStatus.SKIPPED, "Cell should match [0-9][a-zA-Z]: " + cell);
+            printResult(SudokuStatus.SKIPPED, "Cell should match [a-iA-I][0-9]: " + cell);
             return;
         }
 

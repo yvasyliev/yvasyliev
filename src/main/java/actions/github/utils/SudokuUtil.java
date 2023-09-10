@@ -72,7 +72,7 @@ public class SudokuUtil {
     }
 
     public static boolean isInputCellValid(String cell) {
-        return Pattern.compile("[1-9][a-iA-I]")
+        return Pattern.compile("[a-iA-I][1-9]")
                 .matcher(cell)
                 .matches();
     }
