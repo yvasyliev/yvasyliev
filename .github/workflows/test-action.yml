@@ -21,7 +21,7 @@ jobs:
       - name: run code
         id: run_code
         run: |
-          java -jar target/github-actions-check-1.0.0-jar-with-dependencies.jar >> $GITHUB_OUTPUT
+          java -jar target/github-actions-check-1.0.0-jar-with-dependencies.jar ${{ github.event.issue.title }} >> $GITHUB_OUTPUT
       - name: display result
         run: |
           echo ${{ steps.run_code.outputs.status }}
@@ -43,4 +43,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh issue close "${{ github.event.number }}" -c "${{ steps.run_code.outputs.reason }}" -r "${{ env.CLOSING_REASON }}"
+          gh issue close "${{ github.event.issue.number }}" -c "${{ steps.run_code.outputs.reason }}" -r "${{ env.CLOSING_REASON }}"

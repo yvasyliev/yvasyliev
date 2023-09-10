@@ -12,6 +12,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
             printResult(SudokuStatus.SKIPPED, "No args passed.");
+            return;
         }
 
         switch (args[0]) {
