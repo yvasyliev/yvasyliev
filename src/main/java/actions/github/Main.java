@@ -47,8 +47,8 @@ public class Main {
             return;
         }
 
-        var row = SudokuUtil.ROW_NAMES.indexOf(cell.charAt(0));
-        var col = SudokuUtil.COL_NAMES.indexOf(cell.charAt(1));
+        var row = SudokuUtil.COL_NAMES.indexOf(cell.charAt(0));
+        var col = SudokuUtil.ROW_NAMES.indexOf(cell.charAt(1));
         var cellValue = Integer.parseInt(value);
 
         var sudokuGame = new MarkdownSudokuGameSupplier().get();
