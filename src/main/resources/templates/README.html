@@ -216,7 +216,7 @@
         <td th:text="${nextMove}"></td>
         <td>
             <span th:each="cellValue: ${#numbers.sequence(1, 9)}">
-                <a th:href="@{~/yvasyliev/github-actions-check/issues/new(title='fill nextMove 1',body='Just push \'Submit new issue\'. You don\'t need to do anything else.' )}"
+                <a th:href="@{https://github.com/yvasyliev/github-actions-check/issues/new(title='fill nextMove 1',body='Just push \'Submit new issue\'. You don\'t need to do anything else.' )}"
                    th:text="${cellValue}"
                 ></a><span th:text="${cellValue} == 9 ? '' : ' , '"></span>
             </span>
