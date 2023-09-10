@@ -207,3 +207,19 @@
         </td>
     </tr>
 </table>
+
+<table class="nextMoves" xmlns:th="http://www.thymeleaf.org">
+    <tr>
+        <th colspan="2">Next moves (click on any number)</th>
+    </tr>
+    <tr th:each="nextMove: ${nextMoves}">
+        <td th:text="${nextMove}"></td>
+        <td>
+            <span th:each="cellValue: ${#numbers.sequence(1, 9)}">
+                <a th:href="@{~/yvasyliev/github-actions-check/issues/new(title='fill nextMove 1',body='Just push \'Submit new issue\'. You don\'t need to do anything else.' )}"
+                   th:text="${cellValue}"
+                ></a><span th:text="${cellValue} == 9 ? '' : ' , '"></span>
+            </span>
+        </td>
+    </tr>
+</table>

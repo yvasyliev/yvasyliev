@@ -3,6 +3,8 @@ package actions.github.service;
 import actions.github.model.SudokuGame;
 import actions.github.utils.SudokuUtil;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -30,6 +32,9 @@ public class SudokuGameSupplier implements Supplier<SudokuGame> {
 
         removedCells.forEach(removedCell -> grid[removedCell.get(0)][removedCell.get(1)] = 0);
 
-        return new SudokuGame(grid, removedCells);
+        var emptyCells = new ArrayList<>(removedCells);
+        emptyCells.sort(Comparator.comparingInt((List<Integer> cell) -> cell.get(1)).thenComparingInt(cell -> cell.get(0)));
+
+        return new SudokuGame(grid, emptyCells);
     }
 }

@@ -24,7 +24,7 @@ public class Main {
                 }
             }
             case "new" -> {
-                new ReadmeConsumer().accept(new SudokuGameSupplier().get().grid);
+                new ReadmeConsumer().accept(new SudokuGameSupplier().get());
                 printResult(SudokuStatus.EXECUTED, "New sudoku is waiting for you: https://github.com/yvasyliev");
             }
             default -> printResult(SudokuStatus.SKIPPED, "Unknown command: " + args[0]);
@@ -59,11 +59,11 @@ public class Main {
             return;
         }
 
-        if (sudokuGame.missingCells.isEmpty()) {
+        if (sudokuGame.emptyCells.isEmpty()) {
             sudokuGame = new SudokuGameSupplier().get();
             printResult(SudokuStatus.EXECUTED, "Congratulations! You've just solved a sudoku. Try a new one: https://github.com/yvasyliev");
         }
 
-        new ReadmeConsumer().accept(sudokuGame.grid);
+        new ReadmeConsumer().accept(sudokuGame);
     }
 }

@@ -2,16 +2,15 @@ package actions.github.model;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public class SudokuGame {
     public final int[][] grid;
 
-    public final Set<List<Integer>> missingCells;
+    public final List<List<Integer>> emptyCells;
 
-    public SudokuGame(int[][] grid, Set<List<Integer>> missingCells) {
+    public SudokuGame(int[][] grid, List<List<Integer>> emptyCells) {
         this.grid = grid;
-        this.missingCells = missingCells;
+        this.emptyCells = emptyCells;
     }
 
     @Override
@@ -28,7 +27,7 @@ public class SudokuGame {
             }
         }
 
-        gameStr.append("]\nMissing cells:\n").append(missingCells);
+        gameStr.append("]\nMissing cells:\n").append(emptyCells);
         return gameStr.toString();
     }
 }

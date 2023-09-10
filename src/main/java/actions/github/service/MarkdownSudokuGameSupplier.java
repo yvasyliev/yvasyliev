@@ -6,7 +6,8 @@ import org.jsoup.Jsoup;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -17,10 +18,10 @@ public class MarkdownSudokuGameSupplier implements Supplier<SudokuGame> {
             var markdown = Jsoup.parse(new File("README.md"));
 
             var grid = new int[SudokuUtil.GRID_SIZE][SudokuUtil.GRID_SIZE];
-            var emptyCells = new HashSet<List<Integer>>();
+            var emptyCells = new ArrayList<List<Integer>>();
             for (var i = 0; i < SudokuUtil.GRID_SIZE; i++) {
                 for (var j = 0; j < SudokuUtil.GRID_SIZE; j++) {
-                    var cell = markdown.selectFirst("tr." + i + " > td." + j);
+                    var cell = markdown.selectFirst("table.grid > tr." + i + " > td." + j);
                     if (cell != null) {
                         if (cell.hasText()) {
                             grid[i][j] = Integer.parseInt(cell.text());
@@ -31,6 +32,8 @@ public class MarkdownSudokuGameSupplier implements Supplier<SudokuGame> {
                     }
                 }
             }
+
+            emptyCells.sort(Comparator.comparingInt((List<Integer> cell) -> cell.get(1)).thenComparingInt(cell -> cell.get(0)));
 
             return new SudokuGame(grid, emptyCells);
         } catch (IOException e) {
