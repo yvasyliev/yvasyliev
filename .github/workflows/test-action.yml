@@ -27,26 +27,16 @@ jobs:
         run: |
           echo ${{ steps.run_code.outputs.status }}
           echo ${{ steps.run_code.outputs.reason }}
-      - name: Commit & Push changes
-        #        uses: actions-js/push@master
+      - name: commit & push changes
         if: ${{ steps.run_code.outputs.status }} == 'EXECUTED'
-        #        with:
-        #          github_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git add README.md
-          git status
-          git config user.email "ye.vasyliev@gmail.com"
-          git config user.name "Sudoku job"
+#          git config user.email "ye.vasyliev@gmail.com"
+#          git config user.name "Sudoku job"
           git commit -m "Update README.md"
           git push
-      - name: set completed reason
-        if: ${{ steps.run_code.outputs.status }} == 'EXECUTED'
+      - name: set reason
         run: |
-          echo "CLOSING_REASON=completed" >> $GITHUB_ENV
-      - name: set completed reason
-        if: ${{ steps.run_code.outputs.status }} != 'EXECUTED'
-        run: |
-          echo "CLOSING_REASON=not planned" >> $GITHUB_ENV
+          [[ "${{ steps.run_code.outputs.status }}" = "EXECUTED" ]] && echo "CLOSING_REASON=completed" >> $GITHUB_ENV || echo "CLOSING_REASON=not planned" >> $GITHUB_ENV
       - name: handle result
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
