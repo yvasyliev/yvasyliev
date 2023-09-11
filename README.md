@@ -88,7 +88,7 @@
                 <tr class="3">
                     <td><b><a href="#">4</a></b></td>
                     <td class="0">8</td>
-                    <td class="1"></td>
+                    <td class="1">2</td>
                     <td class="2">3</td>
                 </tr>
                 <tr class="4">
@@ -340,39 +340,6 @@
                 >8</a><span> , </span>
             </span><span>
                 <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20G8%209&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >9</a><span></span>
-            </span>
-        </td>
-    </tr>
-    <tr>
-        <td>I2</td>
-        <td>
-            <span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20I2%201&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >1</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20I2%202&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >2</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20I2%203&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >3</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20I2%204&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >4</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20I2%205&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >5</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20I2%206&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >6</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20I2%207&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >7</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20I2%208&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >8</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20I2%209&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
                 >9</a><span></span>
             </span>
         </td>
