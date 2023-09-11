@@ -26,7 +26,7 @@ jobs:
       - name: display result
         run: |
           echo ${{ steps.run_code.outputs.status }}
-          echo ${{ steps.run_code.outputs.reason }}
+          echo "${{ steps.run_code.outputs.reason }}"
       - name: commit & push changes
         if: ${{ steps.run_code.outputs.status }} == 'EXECUTED'
         run: |
