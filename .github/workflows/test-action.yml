@@ -20,6 +20,8 @@ jobs:
         run: mvn clean package
       - name: Run code
         id: run_code
+        env:
+          EMPTY_CELLS_AMOUNT: ${{ env.EMPTY_CELLS_AMOUNT }}
         run: |
           cp target/github-actions-check-1.0.0-jar-with-dependencies.jar runner.jar
           java -jar runner.jar ${{ github.event.issue.title }} >> $GITHUB_OUTPUT
