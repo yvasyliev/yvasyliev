@@ -72,7 +72,7 @@
                 <tr class="1">
                     <td class="6">5</td>
                     <td class="7">2</td>
-                    <td class="8"></td>
+                    <td class="8">9</td>
                 </tr>
                 <tr class="2">
                     <td class="6">4</td>
