@@ -16,7 +16,7 @@ public class Main {
             return;
         }
 
-        switch (args[0]) {
+        switch (args[0].toLowerCase()) {
             case "fill" -> {
                 if (args.length < 3) {
                     printResult(SudokuStatus.SKIPPED, "Not enough args.");
@@ -49,7 +49,7 @@ public class Main {
         }
 
         var row = SudokuUtil.ROW_NAMES.indexOf(cell.charAt(1));
-        var col = SudokuUtil.COL_NAMES.indexOf(cell.charAt(0));
+        var col = SudokuUtil.COL_NAMES.indexOf(cell.toUpperCase().charAt(0));
         var cellValue = Integer.parseInt(value);
 
         var sudokuGame = new MarkdownSudokuGameSupplier().get();
