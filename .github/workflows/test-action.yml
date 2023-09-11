@@ -18,25 +18,22 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn clean package
-      - name: run code
+      - name: Run code
         id: run_code
         run: |
-          cp target/github-actions-check-1.0.0-jar-with-dependencies.jar github-actions-check-1.0.0-jar-with-dependencies.jar
-          java -jar github-actions-check-1.0.0-jar-with-dependencies.jar ${{ github.event.issue.title }} >> $GITHUB_OUTPUT
-      - name: display result
+          cp target/github-actions-check-1.0.0-jar-with-dependencies.jar runner.jar
+          java -jar runner.jar ${{ github.event.issue.title }} >> $GITHUB_OUTPUT
+      - name: Display result
         run: |
           echo ${{ steps.run_code.outputs.status }}
           echo "${{ steps.run_code.outputs.reason }}"
-      - name: commit & push changes
+      - name: Commit & push changes
         if: ${{ steps.run_code.outputs.status }} == 'EXECUTED'
         run: |
           git config user.email "ye.vasyliev@gmail.com"
           git config user.name "Sudoku job"
           [[ "${{ steps.run_code.outputs.status }}" = "EXECUTED" ]] && git add README.md && git commit -m "Update README.md" && git push && echo "CLOSING_REASON=completed" >> $GITHUB_ENV || echo "CLOSING_REASON=not planned" >> $GITHUB_ENV
-#      - name: set reason
-#        run: |
-#          [[ "${{ steps.run_code.outputs.status }}" = "EXECUTED" ]] && echo "CLOSING_REASON=completed" >> $GITHUB_ENV || echo "CLOSING_REASON=not planned" >> $GITHUB_ENV
-      - name: handle result
+      - name: Handle result
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
