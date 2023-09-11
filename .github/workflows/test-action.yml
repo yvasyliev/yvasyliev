@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.email "ye.vasyliev@gmail.com"
           git config user.name "Sudoku job"
-          [[ "${{ steps.run_code.outputs.status }}" = "EXECUTED" ]] && git add README.md && git commit -m "Update README.md" && git push && echo "CLOSING_REASON=completed" || echo "CLOSING_REASON=not planned" >> $GITHUB_ENV
+          [[ "${{ steps.run_code.outputs.status }}" = "EXECUTED" ]] && git add README.md && git commit -m "Update README.md" && git push && echo "CLOSING_REASON=completed" >> $GITHUB_ENV || echo "CLOSING_REASON=not planned" >> $GITHUB_ENV
 #      - name: set reason
 #        run: |
 #          [[ "${{ steps.run_code.outputs.status }}" = "EXECUTED" ]] && echo "CLOSING_REASON=completed" >> $GITHUB_ENV || echo "CLOSING_REASON=not planned" >> $GITHUB_ENV
