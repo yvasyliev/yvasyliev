@@ -7,6 +7,7 @@ import actions.github.utils.SudokuStatus;
 import actions.github.utils.SudokuUtil;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -52,12 +53,18 @@ public class Main {
         var cellValue = Integer.parseInt(value);
 
         var sudokuGame = new MarkdownSudokuGameSupplier().get();
+        if (sudokuGame.grid[row][col] != 0) {
+            printResult(SudokuStatus.SKIPPED, cell + " cell is already filled. Try to fill different ones: https://github.com/yvasyliev");
+            return;
+        }
         sudokuGame.grid[row][col] = cellValue;
 
         if (!SudokuUtil.isCellValid(sudokuGame.grid, row, col)) {
             printResult(SudokuStatus.FAILED, cellValue + " is incorrect value. Try different value: https://github.com/yvasyliev");
             return;
         }
+
+        sudokuGame.emptyCells.remove(List.of(row, col));
 
         if (sudokuGame.emptyCells.isEmpty()) {
             sudokuGame = new SudokuGameSupplier().get();
