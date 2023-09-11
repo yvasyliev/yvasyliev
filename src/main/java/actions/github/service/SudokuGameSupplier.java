@@ -23,12 +23,13 @@ public class SudokuGameSupplier implements Supplier<SudokuGame> {
 
         var removedCells = new HashSet<List<Integer>>();
         var random = ThreadLocalRandom.current();
+        var emptyCellsAmount = Integer.parseInt(System.getenv("EMPTY_CELLS_AMOUNT"));
         do {
             removedCells.add(List.of(
                     random.nextInt(0, SudokuUtil.GRID_SIZE),
                     random.nextInt(0, SudokuUtil.GRID_SIZE)
             ));
-        } while (removedCells.size() < 5); // TODO: 9/9/2023 replace with System.getEnv
+        } while (removedCells.size() < emptyCellsAmount);
 
         removedCells.forEach(removedCell -> grid[removedCell.get(0)][removedCell.get(1)] = 0);
 
