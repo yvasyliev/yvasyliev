@@ -30,6 +30,7 @@ jobs:
         run: |
           echo ${{ steps.run_code.outputs.status }}
           echo "${{ steps.run_code.outputs.reason }}"
+          echo "${{ github.event.issue.author }}"
       - name: Commit & push changes
         if: ${{ steps.run_code.outputs.status }} == 'EXECUTED'
         run: |
