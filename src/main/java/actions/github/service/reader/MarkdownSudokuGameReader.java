@@ -104,7 +104,7 @@ public class MarkdownSudokuGameReader implements SudokuGameReader {
                 .select("table.leaderboard tr.record")
                 .stream()
                 .map(record -> {
-                    var whoElement = record.selectFirst("td.who");
+                    var whoElement = record.selectFirst(".who");
                     if (whoElement == null || !whoElement.hasText()) {
                         return null;
                     }

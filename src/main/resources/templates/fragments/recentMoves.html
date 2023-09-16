@@ -7,7 +7,11 @@
         <th>Who</th>
     </tr>
     <tr class="move" th:each="recentMove : ${sudokuGame.recentMoves()}">
-        <td><code class="cell" th:text="${#strings.substring('ABCDEFGHI', recentMove.cell().columnNumber(), recentMove.cell().columnNumber() + 1)} + ${recentMove.cell().rowNumber() + 1} + ' -> ' + ${recentMove.cell().value()}"></code></td>
-        <td class="who" th:text="${recentMove.who()}"></td>
+        <td><code class="cell"
+                  th:text="${#strings.substring('ABCDEFGHI', recentMove.cell().columnNumber(), recentMove.cell().columnNumber() + 1)} + ${recentMove.cell().rowNumber() + 1} + ' -> ' + ${recentMove.cell().value()}"></code>
+        </td>
+        <td>👤<a class="who"
+                th:href="'https://github.com/' + ${recentMove.who().substring(1, recentMove.who().length())}"
+                th:text="${recentMove.who()}"></a></td>
     </tr>
 </table>

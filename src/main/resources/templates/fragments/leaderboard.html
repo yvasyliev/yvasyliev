@@ -7,7 +7,9 @@
         <th>Score</th>
     </tr>
     <tr class="record" th:each="record : ${sudokuGame.leaderboard()}">
-        <td class="who" th:text="${record.getKey()}"></td>
+        <td>👤<a class="who"
+                th:href="'https://github.com/' + ${record.getKey().substring(1, record.getKey().length())}"
+                th:text="${record.getKey()}"></a></td>
         <td class="score" th:text="${record.getValue()}"></td>
     </tr>
 </table>
