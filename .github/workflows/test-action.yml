@@ -25,13 +25,12 @@ jobs:
           EMPTY_CELLS_AMOUNT: ${{ vars.EMPTY_CELLS_AMOUNT }}
         run: |
           cp target/github-actions-check-1.0.0-jar-with-dependencies.jar runner.jar
-          java -jar runner.jar ${{ github.event.issue.title }} ${{ github.event.issue.author.login }} >> $GITHUB_OUTPUT
+          java -jar runner.jar ${{ github.event.issue.title }} @${{ github.event.issue.user.login }} >> $GITHUB_OUTPUT
       - name: Display result
         run: |
-          echo ${{ steps.run_code.outputs.status }}
-          echo "${{ steps.run_code.outputs.reason }}"
-          echo "${{ github.event.issue.user }}"
-          echo "${{ github.event.issue.user.login }}"
+          echo "Status=${{ steps.run_code.outputs.status }}"
+          echo "Reason=${{ steps.run_code.outputs.reason }}"
+          echo "User=${{ github.event.issue.user.login }}"
       - name: Commit & push changes
         if: ${{ steps.run_code.outputs.status }} == 'EXECUTED'
         run: |
