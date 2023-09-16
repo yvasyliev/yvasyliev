@@ -1,0 +1,26 @@
+<table class="grid" xmlns:th="http://www.thymeleaf.org">
+    <tr th:each="subgridRow, subgridRowStat : ${#numbers.sequence(0, 2)}">
+        <td th:each="subgridCol, subgridColStat : ${#numbers.sequence(0, 2)}">
+            <table th:class="'subgrid' + ${subgridRow * 3 + subgridCol}">
+                <tr th:if="${subgridRowStat.first}">
+                    <th th:if="${subgridColStat.first}"></th>
+                    <th th:each="col : ${#numbers.sequence(0, 2)}">
+                        <a href="#"
+                           th:text="${#strings.substring('ABCDEFGHI', subgridCol * 3 + col, subgridCol * 3 + col + 1)}">
+                        </a>
+                    </th>
+                </tr>
+                <tr th:each="row : ${#numbers.sequence(0, 2)}" th:class="${subgridRow * 3 + row}">
+                    <th th:if="${subgridColStat.first}">
+                        <a href="#"
+                           th:text="${subgridRow * 3 + row + 1}">
+                        </a>
+                    </th>
+                    <td th:each="col : ${#numbers.sequence(0, 2)}"
+                        th:class="${subgridCol * 3 + col}"
+                        th:text="${sudokuGame.grid[subgridRow * 3 + row][subgridCol * 3 + col] == 0 ? '' : sudokuGame.grid[subgridRow * 3 + row][subgridCol * 3 + col]}"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

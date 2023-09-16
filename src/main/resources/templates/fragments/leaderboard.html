@@ -1,0 +1,13 @@
+<table class="leaderboard" xmlns:th="http://www.thymeleaf.org">
+    <tr>
+        <th colspan="2">Leaderboard</th>
+    </tr>
+    <tr>
+        <th>Who</th>
+        <th>Score</th>
+    </tr>
+    <tr class="record" th:each="record : ${sudokuGame.leaderboard()}">
+        <td class="who" th:text="${record.getKey()}"></td>
+        <td class="score" th:text="${record.getValue()}"></td>
+    </tr>
+</table>

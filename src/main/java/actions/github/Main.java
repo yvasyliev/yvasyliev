@@ -1,34 +1,67 @@
 package actions.github;
 
-import actions.github.service.MarkdownSudokuGameSupplier;
-import actions.github.service.ReadmeConsumer;
-import actions.github.service.SudokuGameSupplier;
+import actions.github.exceptions.SudokuGameException;
+import actions.github.model.Cell;
+import actions.github.model.Move;
+import actions.github.model.SudokuGame;
+import actions.github.service.reader.MarkdownSudokuGameReader;
+import actions.github.service.writer.MarkdownSudokuGameWriter;
+import actions.github.utils.Reason;
 import actions.github.utils.SudokuStatus;
 import actions.github.utils.SudokuUtil;
 
-import java.io.IOException;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        if (args.length == 0) {
-            printResult(SudokuStatus.SKIPPED, "No args passed.");
-            return;
-        }
+    private static final int EMPTY_CELLS_AMOUNT = Integer.parseInt(System.getenv("EMPTY_CELLS_AMOUNT"));
+    private static final String TARGET_FILE = "README.md";
 
-        switch (args[0].toLowerCase()) {
-            case "fill" -> {
-                if (args.length < 3) {
-                    printResult(SudokuStatus.SKIPPED, "Not enough args.");
-                } else {
-                    fillCell(args[1], args[2]);
+    public static void main(String[] args) {
+        try {
+            if (args.length == 0) {
+                throw new SudokuGameException(SudokuStatus.FAILED, Reason.NO_ARGS);
+            }
+
+            switch (args[0].toLowerCase()) {
+                case "new" -> {
+                    var sudokuGame = new MarkdownSudokuGameReader(TARGET_FILE).read();
+                    sudokuGame = new SudokuGame(SudokuUtil.randomUnsolvedGrid(EMPTY_CELLS_AMOUNT), List.of(), sudokuGame.leaderboard());
+                    new MarkdownSudokuGameWriter(TARGET_FILE).write(sudokuGame);
+                }
+                case "fill" -> {
+                    if (args.length < 4) {
+                        throw new SudokuGameException(SudokuStatus.FAILED, Reason.NOT_ENOUGH_ARG.apply(args));
+                    }
+
+                    var cellId = args[1].toUpperCase();
+
+                    var rowNumber = SudokuUtil.parseRowNumber(cellId);
+                    var columnNumber = SudokuUtil.parseColumnNumber(cellId);
+                    if (rowNumber == -1 || columnNumber == -1) {
+                        throw new SudokuGameException(SudokuStatus.FAILED, Reason.INVALID_CELL_ID.apply(args[1]));
+                    }
+
+                    var cellValue = SudokuUtil.parseCellValue(args[2]);
+                    if (cellValue == -1) {
+                        throw new SudokuGameException(SudokuStatus.FAILED, Reason.INVALID_CELL_VALUE.apply(args[2]));
+                    }
+
+                    var sudokuGame = new MarkdownSudokuGameReader(TARGET_FILE).read();
+                    if (!sudokuGame.record(new Move(new Cell(rowNumber, columnNumber, cellValue), args[3]))) {
+                        throw new SudokuGameException(SudokuStatus.FAILED, Reason.INCORRECT_MOVE.apply(cellId, cellValue));
+                    }
+                    var reason = Reason.CELL_FILLED.apply(cellId, cellValue);
+
+                    if (sudokuGame.isSolved()) {
+                        sudokuGame = new SudokuGame(SudokuUtil.randomUnsolvedGrid(EMPTY_CELLS_AMOUNT), List.of(), sudokuGame.leaderboard());
+                        reason = Reason.SUDOKU_SOLVED;
+                    }
+                    new MarkdownSudokuGameWriter(TARGET_FILE).write(sudokuGame);
+                    printResult(SudokuStatus.EXECUTED, reason);
                 }
             }
-            case "new" -> {
-                new ReadmeConsumer().accept(new SudokuGameSupplier().get());
-                printResult(SudokuStatus.EXECUTED, "New sudoku is waiting for you: https://github.com/yvasyliev");
-            }
-            default -> printResult(SudokuStatus.SKIPPED, "Unknown command: " + args[0]);
+        } catch (SudokuGameException e) {
+            printResult(e.getStatus(), e.getMessage());
         }
     }
 
@@ -37,42 +70,4 @@ public class Main {
         System.out.println("reason=" + reason);
     }
 
-    private static void fillCell(String cell, String value) {
-        if (!SudokuUtil.isInputCellValid(cell)) {
-            printResult(SudokuStatus.SKIPPED, "Cell should match [a-iA-I][0-9]: " + cell);
-            return;
-        }
-
-        if (!SudokuUtil.isInputValueValid(value)) {
-            printResult(SudokuStatus.SKIPPED, "Cell value should match [0-9]: " + value);
-            return;
-        }
-
-        var row = SudokuUtil.ROW_NAMES.indexOf(cell.charAt(1));
-        var col = SudokuUtil.COL_NAMES.indexOf(cell.toUpperCase().charAt(0));
-        var cellValue = Integer.parseInt(value);
-
-        var sudokuGame = new MarkdownSudokuGameSupplier().get();
-        if (sudokuGame.grid[row][col] != 0) {
-            printResult(SudokuStatus.SKIPPED, cell + " cell is already filled. Try to fill different ones: https://github.com/yvasyliev");
-            return;
-        }
-        sudokuGame.grid[row][col] = cellValue;
-
-        if (!SudokuUtil.isCellValid(sudokuGame.grid, row, col)) {
-            printResult(SudokuStatus.FAILED, cellValue + " is incorrect value. Try different value: https://github.com/yvasyliev");
-            return;
-        }
-
-        sudokuGame.emptyCells.remove(List.of(row, col));
-
-        if (sudokuGame.emptyCells.isEmpty()) {
-            sudokuGame = new SudokuGameSupplier().get();
-            printResult(SudokuStatus.EXECUTED, "Congratulations! You've just solved a sudoku. Try a new one: https://github.com/yvasyliev");
-        } else {
-            printResult(SudokuStatus.EXECUTED, cell + " cell is filled. Try to fill the others: https://github.com/yvasyliev");
-        }
-
-        new ReadmeConsumer().accept(sudokuGame);
-    }
 }

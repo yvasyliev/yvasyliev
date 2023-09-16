@@ -1,0 +1,13 @@
+<table class="recentMoves" xmlns:th="http://www.thymeleaf.org">
+    <tr>
+        <th colspan="2">Recent moves</th>
+    </tr>
+    <tr>
+        <th>Move</th>
+        <th>Who</th>
+    </tr>
+    <tr class="move" th:each="recentMove : ${sudokuGame.recentMoves()}">
+        <td><code class="cell" th:text="${#strings.substring('ABCDEFGHI', recentMove.cell().columnNumber(), recentMove.cell().columnNumber() + 1)} + ${recentMove.cell().rowNumber() + 1} + ' -> ' + ${recentMove.cell().value()}"></code></td>
+        <td class="who" th:text="${recentMove.who()}"></td>
+    </tr>
+</table>

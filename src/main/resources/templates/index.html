@@ -1,0 +1,18 @@
+<h1>Sudoku</h1>
+
+<p xmlns:th="http://www.thymeleaf.org" th:replace="fragments/grid"><code>{SUDOKU_GRID}</code></p>
+
+<p><a xmlns:th="http://www.thymeleaf.org" th:href="@{https://github.com/yvasyliev/github-actions-check/issues/new(title='new',body='Just push \'Submit new issue\'. You don\'t need to do anything else.' )}">Click here to start new game.</a></p>
+
+<table xmlns:th="http://www.thymeleaf.org">
+    <tr>
+        <td>
+            <p th:replace="fragments/nextMoves"><code>{NEXT_MOVES}</code></p>
+        </td>
+        <td>
+            <p th:replace="fragments/recentMoves"><code>{RECENT_MOVES}</code></p>
+        </td>
+    </tr>
+</table>
+
+<p xmlns:th="http://www.thymeleaf.org" th:replace="fragments/leaderboard"><code>{LEADERBOARD}</code></p>

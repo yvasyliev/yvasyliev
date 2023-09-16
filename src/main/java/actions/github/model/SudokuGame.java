@@ -1,33 +1,60 @@
 package actions.github.model;
 
-import java.util.Arrays;
+import actions.github.utils.SudokuUtil;
+
+import java.util.AbstractMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.IntStream;
 
-public class SudokuGame {
-    public final int[][] grid;
+public record SudokuGame(int[][] grid, List<Move> recentMoves, Set<Map.Entry<String, Integer>> leaderboard) {
+    public List<Cell> availableMoves() {
+        return IntStream
+                .range(0, SudokuUtil.GRID_SIZE)
+                .mapToObj(columnNumber -> IntStream
+                        .range(0, SudokuUtil.GRID_SIZE)
+                        .mapToObj(rowNumber -> new Cell(
+                                rowNumber,
+                                columnNumber,
+                                grid[rowNumber][columnNumber]
+                        ))
+                        .filter(move -> move.value() == 0)
+                )
+                .flatMap(row -> row)
+                .toList();
 
-    public final List<List<Integer>> emptyCells;
-
-    public SudokuGame(int[][] grid, List<List<Integer>> emptyCells) {
-        this.grid = grid;
-        this.emptyCells = emptyCells;
     }
 
-    @Override
-    public String toString() {
-        var gameStr = new StringBuilder("Grid:\n[");
+    public boolean isSolved() {
+        return availableMoves().isEmpty();
+    }
 
-        for (int i = 0; i < grid.length; i++) {
-            if (i > 0) {
-                gameStr.append(" ");
-            }
-            gameStr.append(Arrays.toString(grid[i]));
-            if (i + 1 < grid.length) {
-                gameStr.append(",\n");
-            }
+    public boolean record(Move move) {
+        var cell = move.cell();
+        if (grid[cell.rowNumber()][cell.columnNumber()] != 0) {
+            return false;
         }
 
-        gameStr.append("]\nMissing cells:\n").append(emptyCells);
-        return gameStr.toString();
+        grid[cell.rowNumber()][cell.columnNumber()] = cell.value();
+        if (!SudokuUtil.isCellValid(grid, cell.rowNumber(), cell.columnNumber())) {
+            grid[cell.rowNumber()][cell.columnNumber()] = 0;
+            return false;
+        }
+
+        recentMoves.add(0, move);
+
+        var newRecord = new AbstractMap.SimpleEntry<>(move.who(), availableMoves().size() + 1);
+        for (var iterator = leaderboard.iterator(); iterator.hasNext(); ) {
+            var record = iterator.next();
+            if (record.getKey().equals(move.who())) {
+                newRecord.setValue(record.getValue() + newRecord.getValue());
+                iterator.remove();
+                break;
+            }
+        }
+        leaderboard.add(newRecord);
+
+        return true;
     }
 }

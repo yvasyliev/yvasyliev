@@ -1,0 +1,19 @@
+<table class="nextMoves" xmlns:th="http://www.thymeleaf.org">
+    <tr>
+        <th colspan="2">Next moves</th>
+    </tr>
+    <tr>
+        <th>Cell</th>
+        <th>Value (click on any number)</th>
+    </tr>
+    <tr th:each="nextMove : ${sudokuGame.availableMoves()}">
+        <td><code th:text="${#strings.substring('ABCDEFGHI', nextMove.columnNumber(), nextMove.columnNumber() + 1)} + ${nextMove.rowNumber() + 1}"></code></td>
+        <td>
+            <span th:each="cellValue, cellValueStat : ${#numbers.sequence(1, 9)}">
+                <a th:href="@{https://github.com/yvasyliev/github-actions-check/issues/new(title='fill ' + ${#strings.substring('ABCDEFGHI', nextMove.columnNumber(), nextMove.columnNumber() + 1)} + ${nextMove.rowNumber() + 1} + ' ' + ${cellValue},body='Just push \'Submit new issue\'. You don\'t need to do anything else.' )}"
+                   th:text="${cellValue}"
+                ></a><span th:unless="${cellValueStat.last}"> , </span>
+            </span>
+        </td>
+    </tr>
+</table>
