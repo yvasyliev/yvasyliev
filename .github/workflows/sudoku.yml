@@ -1,11 +1,11 @@
-name: Test action
+name: Sudoku game
 
 on:
   issues:
     types: [ opened ]
 
 jobs:
-  build:
+  do-action:
     if: startsWith(github.event.issue.title, 'new') || startsWith(github.event.issue.title, 'fill')
     runs-on: ubuntu-latest
     steps:
