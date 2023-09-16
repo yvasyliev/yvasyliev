@@ -35,8 +35,8 @@ jobs:
       - name: Commit & push changes
         if: ${{ steps.run_code.outputs.status }} == 'EXECUTED'
         run: |
-          git config user.email "ye.vasyliev@gmail.com"
-          git config user.name "Sudoku job"
+          git config user.email "github-actions@github.com"
+          git config user.name "github-actions"
           [[ "${{ steps.run_code.outputs.status }}" = "EXECUTED" ]] && git add README.md && git commit -m "Update README.md" && git push && echo "CLOSING_REASON=completed" >> $GITHUB_ENV || echo "CLOSING_REASON=not planned" >> $GITHUB_ENV
       - name: Handle result
         env:
