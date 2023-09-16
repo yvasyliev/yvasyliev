@@ -27,6 +27,7 @@ public class Main {
                     var sudokuGame = new MarkdownSudokuGameReader(TARGET_FILE).read();
                     sudokuGame = new SudokuGame(SudokuUtil.randomUnsolvedGrid(EMPTY_CELLS_AMOUNT), List.of(), sudokuGame.leaderboard());
                     new MarkdownSudokuGameWriter(TARGET_FILE).write(sudokuGame);
+                    printResult(SudokuStatus.EXECUTED, Reason.SUDOKU_CREATED);
                 }
                 case "fill" -> {
                     if (args.length < 4) {
