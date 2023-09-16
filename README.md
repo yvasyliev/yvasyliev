@@ -141,7 +141,7 @@
                 <tr class="4">
                     <td class="3">6</td>
                     <td class="4">9</td>
-                    <td class="5"></td>
+                    <td class="5">8</td>
                 </tr>
                 <tr class="5">
                     <td class="3">4</td>
@@ -252,39 +252,6 @@
         <th>Value (click on any number)</th>
     </tr>
     <tr>
-        <td><code>F5</code></td>
-        <td>
-            <span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20F5%201&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >1</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20F5%202&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >2</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20F5%203&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >3</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20F5%204&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >4</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20F5%205&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >5</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20F5%206&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >6</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20F5%207&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >7</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20F5%208&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >8</a><span> , </span>
-            </span><span>
-                <a href="https://github.com/yvasyliev/github-actions-check/issues/new?title=fill%20F5%209&amp;body=Just%20push%20&#39;Submit%20new%20issue&#39;.%20You%20don&#39;t%20need%20to%20do%20anything%20else."
-                >9</a>
-            </span>
-        </td>
-    </tr>
-    <tr>
         <td><code>I6</code></td>
         <td>
             <span>
@@ -329,6 +296,12 @@
         <th>Who</th>
     </tr>
     <tr class="move">
+        <td><code class="cell">F5 -&gt; 8</code>
+        </td>
+        <td>👤<a class="who"
+                href="https://github.com/yvasyliev">@yvasyliev</a></td>
+    </tr>
+    <tr class="move">
         <td><code class="cell">B3 -&gt; 8</code>
         </td>
         <td>👤<a class="who"
@@ -349,6 +322,6 @@
     <tr class="record">
         <td>👤<a class="who"
                 href="https://github.com/yvasyliev">@yvasyliev</a></td>
-        <td class="score">5</td>
+        <td class="score">7</td>
     </tr>
 </table>
