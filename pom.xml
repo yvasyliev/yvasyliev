@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.yvasyliev</groupId>
-    <artifactId>github-actions-check</artifactId>
-    <version>1.0.0</version>
+    <artifactId>github-actions-sudoku</artifactId>
+    <version>1.0.1</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
